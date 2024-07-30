@@ -3,13 +3,12 @@ import Image from "next/image";
 import {Button} from "@/components/ui";
 import {ArrowRight, ShoppingCart, User} from "lucide-react";
 import {cn} from "@/lib/utils";
-import {memo} from "react";
 
 interface HeaderProps {
   className?: string
 }
 
-export const Header = memo(({ className }: HeaderProps) => {
+export const Header =({ className }: HeaderProps) => {
   return (
     <header className={cn("border border-b", className)}>
       <Container className="flex items-center justify-between py-8">
@@ -44,4 +43,4 @@ export const Header = memo(({ className }: HeaderProps) => {
       </Container>
     </header>
   );
-})
+}

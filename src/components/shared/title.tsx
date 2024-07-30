@@ -9,7 +9,7 @@ interface TitleProps {
   text: string;
 }
 
-export const Title = memo(({ text, size = 'sm', className }: TitleProps) => {
+export const Title = ({ text, size = 'sm', className }: TitleProps) => {
   const mapTagBySize = {
     xs: 'h5',
     sm: 'h4',
@@ -33,4 +33,4 @@ export const Title = memo(({ text, size = 'sm', className }: TitleProps) => {
     { className: clsx(mapClassNameBySize[size], className) },
     text,
   );
-});
+};
