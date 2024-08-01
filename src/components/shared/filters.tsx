@@ -1,7 +1,7 @@
-import {Title} from "../title";
+import {Title} from "./title";
 import {FilterCheckbox} from "./filtersCheckbox";
 import {Input} from "@/components/ui";
-import {RangeSlider} from "@/components/shared/Filters/rangeSlider";
+import {RangeSlider} from "@/components/shared/rangeSlider";
 import {CheckboxFiltersGroup} from "./checkboxFiltersGroup";
 
 interface FiltersProps {
