@@ -4,13 +4,13 @@ import "./globals.css";
 import { Header } from "@/components/shared";
 
 const nunito = Nunito({
-  subsets: ['cyrillic'],
-  variable: '--font-nunito',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ["cyrillic"],
+  variable: "--font-nunito",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "Next Pizza | Главная"
+  title: "Next Pizza | Главная",
 };
 
 export default function RootLayout({
@@ -20,13 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body className={nunito.className}>
-      <main className="min-h-screen">
-        <Header/>
-        {children}
-      </main>
-    </body>
-</html>
-)
-  ;
+      <body className={nunito.className}>
+        <main className="min-h-screen">
+          <Header />
+          {children}
+        </main>
+      </body>
+    </html>
+  );
 }
