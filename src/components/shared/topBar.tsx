@@ -1,19 +1,24 @@
-import React from 'react';
-import {Container} from "./container";
-import {Categories} from "./categories";
-import {SortPopup} from './sortPopup'
-import {cn} from "@/lib/utils";
+import React from "react";
+import { Container } from "./container";
+import { Categories } from "./categories";
+import { SortPopup } from "./sortPopup";
+import { cn } from "@/lib/utils";
 
 interface TopBar {
-  className?: string
+  className?: string;
 }
 
-export const TopBar = ({className}: TopBar) => {
+export const TopBar = ({ className }: TopBar) => {
   return (
-    <div className={cn("sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10", className)}>
+    <div
+      className={cn(
+        "sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10",
+        className
+      )}
+    >
       <Container className="flex items-center justify-between">
-        <Categories/>
-        <SortPopup/>
+        <Categories />
+        <SortPopup />
       </Container>
     </div>
   );

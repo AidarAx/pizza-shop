@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import {FilterCheckbox, FilterCheckboxProps} from "./filtersCheckbox";
-import {Input} from "@/components/ui";
-import {ChangeEvent, useCallback, useMemo, useState} from "react";
+import { FilterCheckbox, FilterCheckboxProps } from "./filtersCheckbox";
+import { Input } from "@/components/ui";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 
-type Item = FilterCheckboxProps
+type Item = FilterCheckboxProps;
 
 interface CheckboxFiltersGroupProps {
-  className?: string
-  title: string
-  items: Item[]
-  defaultItems: Item[]
-  limit?: number
-  searchInputPlaceholder?: string
-  onChange?: (values: string[]) => void
-  defaultValue?: string
+  className?: string;
+  title: string;
+  items: Item[];
+  defaultItems: Item[];
+  limit?: number;
+  searchInputPlaceholder?: string;
+  onChange?: (values: string[]) => void;
+  defaultValue?: string;
 }
 
 export const CheckboxFiltersGroup = (props: CheckboxFiltersGroupProps) => {
@@ -24,23 +24,28 @@ export const CheckboxFiltersGroup = (props: CheckboxFiltersGroupProps) => {
     items,
     defaultItems,
     limit = 6,
-    searchInputPlaceholder = 'Поиск...',
+    searchInputPlaceholder = "Поиск...",
     onChange,
-    defaultValue
+    defaultValue,
   } = props;
 
   const [showAll, setShowAll] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const onChangeSearchInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value)
-  }, [setSearchValue])
+  const onChangeSearchInput = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
+    },
+    [setSearchValue]
+  );
 
   const list = useMemo(() => {
     return showAll
-      ? items.filter(item => item.text.toLowerCase().includes(searchValue.toLowerCase()))
-      : defaultItems.slice(0, limit)
-  }, [showAll, defaultItems, limit, items, searchValue])
+      ? items.filter((item) =>
+          item.text.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      : defaultItems.slice(0, limit);
+  }, [showAll, defaultItems, limit, items, searchValue]);
 
   return (
     <div className={className}>
@@ -48,26 +53,34 @@ export const CheckboxFiltersGroup = (props: CheckboxFiltersGroupProps) => {
 
       {showAll && (
         <div className="mb-5">
-          <Input onChange={onChangeSearchInput} placeholder={searchInputPlaceholder} className="bg-gray-50 border-none"/>
+          <Input
+            onChange={onChangeSearchInput}
+            placeholder={searchInputPlaceholder}
+            className="bg-gray-50 border-none"
+          />
         </div>
       )}
 
       <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
-        {list && list.map((item, index) => (
-          <FilterCheckbox
-            key={index}
-            text={item.text}
-            value={item.value}
-            endAdornment={item.endAdornment}
-            onCheckedChange={() => console.log(index)}
-          />
-        ))}
+        {list &&
+          list.map((item, index) => (
+            <FilterCheckbox
+              key={index}
+              text={item.text}
+              value={item.value}
+              endAdornment={item.endAdornment}
+              onCheckedChange={() => console.log(index)}
+            />
+          ))}
       </div>
 
       {items.length > limit && (
         <div className={showAll ? "border-t border-t-neutral-100 mt-4" : ""}>
-          <button onClick={() => setShowAll(!showAll)} className="text-primary mt-3">
-            {showAll ? 'Скрыть' : '+ Показать все'}
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="text-primary mt-3"
+          >
+            {showAll ? "Скрыть" : "+ Показать все"}
           </button>
         </div>
       )}

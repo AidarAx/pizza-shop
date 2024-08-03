@@ -1,5 +1,5 @@
-import {Checkbox} from "@/components/ui";
-import {ReactNode} from "react";
+import { Checkbox } from "@/components/ui";
+import { ReactNode } from "react";
 
 export interface FilterCheckboxProps {
   text: string;
@@ -11,14 +11,7 @@ export interface FilterCheckboxProps {
 }
 
 export const FilterCheckbox = (props: FilterCheckboxProps) => {
-  const {
-    text,
-    value,
-    endAdornment,
-    onCheckedChange,
-    checked,
-    name,
-  } = props;
+  const { text, value, endAdornment, onCheckedChange, checked, name } = props;
 
   return (
     <div className="flex items-center space-x-2">
@@ -31,7 +24,8 @@ export const FilterCheckbox = (props: FilterCheckboxProps) => {
       />
       <label
         htmlFor={`checkbox-${String(name)}-${String(value)}`}
-        className="leading-none cursor-pointer flex-1">
+        className="leading-none cursor-pointer flex-1"
+      >
         {text}
       </label>
       {endAdornment}
