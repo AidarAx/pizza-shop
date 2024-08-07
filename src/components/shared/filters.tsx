@@ -1,20 +1,35 @@
+"use client";
+
 import { Title } from "./title";
 import { FilterCheckbox } from "./filtersCheckbox";
 import { Input } from "@/components/ui";
 import { RangeSlider } from "@/components/shared/rangeSlider";
 import { CheckboxFiltersGroup } from "./checkboxFiltersGroup";
+import { useFilterIngredients } from "@/hooks/useFilterIngredients";
+import { useMemo } from "react";
 
 interface FiltersProps {
   className?: string;
 }
 export const Filters = ({ className }: FiltersProps) => {
+  const { ingredients, onAddId, selectedIds } = useFilterIngredients();
+
+  const ingredientsList = useMemo(
+    () =>
+      ingredients.map(({ id, name }) => ({
+        value: id.toString(),
+        text: name,
+      })),
+    [ingredients]
+  );
+
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
 
       <div className="flex flex-col gap-4">
-        <FilterCheckbox text="Можно собирать" value="1" />
-        <FilterCheckbox text="Новинки" value="2" />
+        <FilterCheckbox name="ready" text="Можно собирать" value="1" />
+        <FilterCheckbox name="new" text="Новинки" value="2" />
       </div>
 
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-6">
@@ -35,72 +50,14 @@ export const Filters = ({ className }: FiltersProps) => {
 
       <CheckboxFiltersGroup
         title="Ингредиенты"
+        name="ingredients"
         className="mt-5"
         limit={6}
-        items={[
-          {
-            text: "рыба",
-            value: "1",
-          },
-          {
-            text: "рыба",
-            value: "2",
-          },
-          {
-            text: "рыба",
-            value: "3",
-          },
-          {
-            text: "рыба",
-            value: "4",
-          },
-          {
-            text: "рыба",
-            value: "5",
-          },
-          {
-            text: "рыба",
-            value: "6",
-          },
-          {
-            text: "рыба",
-            value: "7",
-          },
-          {
-            text: "рыба",
-            value: "8",
-          },
-          {
-            text: "рыба",
-            value: "9",
-          },
-        ]}
-        defaultItems={[
-          {
-            text: "рыба",
-            value: "1",
-          },
-          {
-            text: "рыба",
-            value: "2",
-          },
-          {
-            text: "рыба",
-            value: "3",
-          },
-          {
-            text: "рыба",
-            value: "4",
-          },
-          {
-            text: "рыба",
-            value: "5",
-          },
-          {
-            text: "рыба",
-            value: "6",
-          },
-        ]}
+        items={ingredientsList}
+        defaultItems={ingredientsList.slice(0, 5)}
+        isLoading={ingredients.length <= 0}
+        onClickCheckbox={onAddId}
+        selectedIds={selectedIds}
       />
     </div>
   );

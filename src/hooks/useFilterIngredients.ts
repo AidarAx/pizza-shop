@@ -1,20 +1,24 @@
 import { services } from "@/services/services";
 import { Ingredient } from "@prisma/client";
 import { useEffect, useState } from "react";
+import { useSet } from "react-use";
 
 interface ReturnProps {
-  items: Ingredient[];
+  ingredients: Ingredient[];
+  selectedIds: Set<string>;
+  onAddId: (id: string) => void;
 }
 
 export const useFilterIngredients = (): ReturnProps => {
-  const [items, setItems] = useState<Ingredient[]>([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [selectedIds, { toggle }] = useSet(new Set<string>([]));
 
   useEffect(() => {
     async function fetchIngredients() {
       try {
         const ingredients = await services.getAllIngredients();
 
-        setItems(ingredients);
+        setIngredients(ingredients);
       } catch (error) {
         console.log(error);
       }
@@ -23,5 +27,5 @@ export const useFilterIngredients = (): ReturnProps => {
     fetchIngredients();
   }, []);
 
-  return { items };
+  return { ingredients, onAddId: toggle, selectedIds };
 };
